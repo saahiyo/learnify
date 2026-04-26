@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>learnify Auth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="inner-page">
+    <header class="navbar">
+        <div class="navbar-inner">
+            <div class="nav-brand">
+                <a class="brand-mark" href="index.html" aria-label="learnify home">
+                    <span>P</span>
+                </a>
+                <a class="logo" href="index.html">learnify</a>
+            </div>
+
+            <nav class="menu" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html">Overview</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="payments.html">Payments</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-tools">
+                <div class="nav-auth-links" data-auth-guest>
+                    <a class="nav-login" href="#login">Log In</a>
+                    <a class="nav-signup" href="#signup">Sign Up</a>
+                </div>
+                <div class="nav-user-profile user-profile user-profile--header" data-auth-user hidden>
+                    <img class="user-avatar" data-user-avatar src="" alt="Guest profile picture" hidden>
+                    <div class="nav-user-copy">
+                        <span class="nav-user-name" data-user-name>Guest</span>
+                        <span class="auth-email" data-user-email>Guest</span>
+                    </div>
+                    <a class="ghost-btn auth-logout" href="#" data-logout-link hidden>Sign out</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-shell">
+        <aside class="side-panel">
+            <h3>Firebase setup</h3>
+            <div class="side-panel-links">
+                <a href="#login">1. Sign in <ion-icon name="log-in-outline"></ion-icon></a>
+                <a href="#signup">2. Create account <ion-icon name="person-add-outline"></ion-icon></a>
+                <a href="payments.html">3. Continue payment <ion-icon name="card-outline"></ion-icon></a>
+            </div>
+            <div class="side-panel-card">
+                <p class="section-label">Current user</p>
+                <div class="user-profile">
+                    <img class="user-avatar" data-user-avatar src="" alt="Guest profile picture" hidden>
+                    <div>
+                        <h3 data-user-name>Guest</h3>
+                        <p class="user-email" data-user-email>Guest</p>
+                    </div>
+                </div>
+                <p>Once Firebase is configured, this area updates automatically after login.</p>
+                <a class="ghost-btn auth-logout" href="#" data-logout-link hidden>Sign out</a>
+            </div>
+        </aside>
+
+        <section class="page-content">
+            <div class="auth-layout">
+                <article class="auth-card" id="login">
+                    <p class="section-label">Login</p>
+                    <h3>Sign in with Firebase Authentication</h3>
+                    <p>Use an email and password account from your Firebase project.</p>
+                    <p class="section-note">If sign-in fails, make sure Email/Password is enabled in Firebase and that your current domain is in the authorized domains list.</p>
+                    <p class="auth-status" data-auth-status aria-live="polite">Firebase login ready. Use email and password below.</p>
+                    <form class="auth-form" data-login-form>
+                        <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
+                        <input type="password" name="password" placeholder="Password" autocomplete="current-password" required>
+                        <button class="cn" type="submit">Login</button>
+                    </form>
+                </article>
+
+                <article class="auth-card" id="signup">
+                    <p class="section-label">Sign up</p>
+                    <h3>Create a new student account</h3>
+                    <p>This creates a Firebase user you can use across the website.</p>
+                    <p class="section-note">The password must be at least 6 characters long for Firebase to accept it.</p>
+                    <form class="auth-form" data-signup-form>
+                        <input type="text" name="signup-username" placeholder="Username" autocomplete="nickname" required>
+                        <input type="email" name="signup-email" placeholder="Email address" autocomplete="email" required>
+                        <input type="password" name="signup-password" placeholder="Password" autocomplete="new-password" required>
+                        <button class="cn" type="submit">Create account</button>
+                    </form>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script src="javascript.js"></script>
+    <script type="module" src="firebase-auth.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

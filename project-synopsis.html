@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learnify Course Website - Project Synopsis</title>
+  <style>
+    :root {
+      --ink: #1f2937;
+      --muted: #4b5563;
+      --accent: #0f766e;
+      --accent-soft: #e6fffb;
+      --line: #d1d5db;
+      --paper: #ffffff;
+      --bg: #f5f7fb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 32px;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(31, 41, 55, 0.08);
+    }
+    h1, h2 {
+      margin: 0 0 12px;
+      line-height: 1.2;
+    }
+    h1 {
+      font-size: 32px;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 20px;
+      margin-top: 28px;
+      color: var(--accent);
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 6px;
+    }
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 18px;
+      margin: 18px 0 8px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fafafa;
+    }
+    .meta div {
+      padding: 4px 0;
+    }
+    .label {
+      font-weight: 700;
+      color: #111827;
+    }
+    ul {
+      margin: 8px 0 0 20px;
+    }
+    li { margin: 4px 0; }
+    .diagram {
+      margin-top: 14px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--accent-soft);
+      overflow: auto;
+      white-space: pre;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+    .section-text {
+      margin-top: 10px;
+      color: var(--ink);
+    }
+    .small-note {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>Project Synopsis</h1>
+    <div class="subtitle">Learnify Course Website</div>
+
+    <div class="meta">
+      <div><span class="label">Student Name:</span> Mohd Saif Shekh</div>
+      <div><span class="label">PRN:</span> 2023017001470374</div>
+      <div><span class="label">Project Type:</span> Front-end multi-page educational website</div>
+      <div><span class="label">Technologies:</span> HTML5, CSS3, JavaScript</div>
+    </div>
+
+    <h2>1. Introduction</h2>
+    <p class="section-text">
+      Learnify Course Website is a multi-page educational website designed to present web design and front-end development courses in a simple and attractive way. It combines course information, admission flow, service details, contact information, and payment options in one connected interface.
+    </p>
+    <p class="section-text">
+      The purpose of this project is to help students explore courses, understand the learning path, and move smoothly from browsing to enrollment.
+    </p>
+
+    <h2>2. Objectives</h2>
+    <ul>
+      <li>Present course details in a clear and organized format.</li>
+      <li>Provide a simple admission and payment flow.</li>
+      <li>Give users quick access to course categories and support pages.</li>
+      <li>Replace scattered information with a single structured website.</li>
+    </ul>
+
+    <h2>3. Scope</h2>
+    <p class="section-text">This project includes the home page, course listing with search/filter, about, services, contact, admission, and payment pages, along with responsive layout and navigation.</p>
+    <p class="section-text">This project does not include database integration, user authentication backend, real payment gateway integration, or an admin dashboard.</p>
+
+    <h2>4. Technologies Used</h2>
+    <ul>
+      <li>HTML5</li>
+      <li>CSS3</li>
+      <li>JavaScript</li>
+      <li>Google Fonts</li>
+      <li>Ionicons</li>
+    </ul>
+
+    <h2>5. System Architecture</h2>
+    <p class="section-text">The project follows a client-side, multi-page website architecture.</p>
+    <p class="section-text">
+      Main components: <strong>index.html</strong> as the landing page, <strong>courses.html</strong> for the course catalog and search, <strong>about.html</strong> for the project overview, <strong>services.html</strong> for service highlights, <strong>admission.html</strong> for form-based enrollment, <strong>payments.html</strong> for fee and payment details, <strong>contact.html</strong> for support information, <strong>style.css</strong> for visual design, and <strong>javascript.js</strong> for course search and filtering.
+    </p>
+    <p class="section-text">Data flow: User opens a page -> reads content -> navigates using menu links -> searches courses or fills admission details -> moves to payment/contact pages.</p>
+
+    <div class="diagram">+------------------+      +-------------------+
+|     Student      | ---> |   Learnify Home   |
++------------------+      +-------------------+
+                                   |
+                                   v
+                  +----------------+----------------+
+                  |                                 |
+                  v                                 v
+         +-------------------+            +-------------------+
+         | Course Catalogue  |            | About / Services  |
+         | Search and Filter  |            | Information Pages |
+         +-------------------+            +-------------------+
+                  |                                 |
+                  v                                 v
+         +-------------------+            +-------------------+
+         | Admission Form    |            | Contact / Help    |
+         +-------------------+            +-------------------+
+                  |
+                  v
+         +-------------------+
+         | Payment Details   |
+         +-------------------+</div>
+
+    <h2>6. Modules & Functionalities</h2>
+    <ul>
+      <li>Home module: Introduces the platform, highlights featured course content, and provides login/signup actions.</li>
+      <li>Course module: Displays multiple course cards with duration, level, and enrollment buttons.</li>
+      <li>Admission module: Collects basic student information through a form.</li>
+      <li>Payment module: Shows payment methods and course fee details.</li>
+      <li>Services module: Explains the support and learning services offered.</li>
+      <li>Contact module: Provides contact details and next-step links.</li>
+      <li>Search module: Filters course cards based on keywords on the courses page.</li>
+    </ul>
+
+    <h2>7. Methodology</h2>
+    <ul>
+      <li>Requirement understanding</li>
+      <li>Page planning</li>
+      <li>UI design</li>
+      <li>HTML/CSS development</li>
+      <li>JavaScript functionality</li>
+      <li>Testing and refinement</li>
+    </ul>
+
+    <h2>8. Expected Outcome</h2>
+    <p class="section-text">The website gives users a smooth way to explore courses, read information, and move toward enrollment. It improves visibility of the course offerings and creates a polished learning platform for students.</p>
+
+    <h2>9. Conclusion</h2>
+    <p class="section-text">Learnify Course Website is a practical front-end project that demonstrates how a course-selling or training website can be organized across multiple pages. It combines design, content presentation, and basic interactivity to create a useful educational portal.</p>
+
+    <h2>10. References</h2>
+    <ul>
+      <li>Project files: index.html, about.html, admission.html, courses.html, payments.html, contact.html, services.html, style.css, javascript.js</li>
+      <li>Google Fonts</li>
+      <li>Ionicons</li>
+    </ul>
+
+    <p class="small-note">Prepared for the Learnify course website project synopsis.</p>
+  </main>
+</body>
+</html>
