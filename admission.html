@@ -10,31 +10,47 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="inner-page">
-    <header class="inner-hero">
-        <div class="navbar">
-            <div class="logo-icon">
-                <h2 class="logo">learnify</h2>
-            </div>
-            <nav class="menu">
-                <ul>
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="about.html">ABOUT</a></li>
-                    <li><a href="services.html">SERVICE</a></li>
-                    <li><a href="courses.html">DESIGN</a></li>
-                    <li><a href="contact.html">CONTACT</a></li>
-                </ul>
-            </nav>
-            <form class="search search-form">
-                <input class="srch" type="search" placeholder="Search course" name="query">
-                <button class="btn" type="submit">Search</button>
-            </form>
+    <header class="navbar">
+        <div class="nav-brand">
+            <a class="brand-mark" href="index.html" aria-label="learnify home">
+                <span>P</span>
+            </a>
+            <a class="logo" href="index.html">learnify</a>
         </div>
+
+        <nav class="menu" aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Overview</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="services.html">Why Choose Us</a></li>
+                <li><a href="about.html">Success Stories</a></li>
+                <li><a href="contact.html">Enroll Now</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-tools">
+            <a class="nav-search" href="courses.html" aria-label="Search courses">
+                <ion-icon name="search-outline"></ion-icon>
+            </a>
+            <div class="nav-auth-links" data-auth-guest>
+                <a class="nav-login" href="auth.html#login">Log In</a>
+                <a class="nav-signup" href="auth.html#signup">Sign Up</a>
+            </div>
+            <div class="nav-user-profile user-profile user-profile--header" data-auth-user hidden>
+                <img class="user-avatar" data-user-avatar src="" alt="Guest profile picture" hidden>
+                <span class="nav-user-name" data-user-name>Guest</span>
+                <a class="ghost-btn auth-logout" href="#" data-logout-link hidden>Sign out</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="inner-hero">
         <div class="inner-hero-content">
             <p class="eyebrow">Admission</p>
             <h1>Apply for your selected course in the next page flow</h1>
             <p>Choose a course, fill in your details, and move to the payment page after admission review.</p>
         </div>
-    </header>
+    </div>
 
     <main class="page-shell">
         <aside class="side-panel">

@@ -134,11 +134,11 @@ function getFriendlyAuthMessage(error) {
 
     switch (code) {
         case "auth/invalid-api-key":
-            return "Firebase is not configured correctly. Check the apiKey in firebaseConfig.";
+            return "Authentication is not configured correctly.";
         case "auth/network-request-failed":
-            return "Firebase could not reach the network. Check your internet connection or CDN access.";
+            return "Could not reach the network. Please check your internet connection.";
         case "auth/operation-not-allowed":
-            return "Enable Email/Password sign-in in the Firebase console.";
+            return "Email/Password sign-in is not currently enabled.";
         case "auth/user-not-found":
         case "auth/wrong-password":
         case "auth/invalid-credential":
@@ -148,9 +148,9 @@ function getFriendlyAuthMessage(error) {
         case "auth/weak-password":
             return "Use a stronger password with at least 6 characters.";
         case "auth/unauthorized-domain":
-            return "Add this site to the Firebase authorized domains list.";
+            return "This site is not authorized for sign in.";
         default:
-            return error?.message || "Firebase authentication failed.";
+            return error?.message || "Authentication failed.";
     }
 }
 
@@ -177,7 +177,7 @@ async function initFirebaseAuth() {
         [appModule, authModule] = await loadFirebaseModules();
     } catch (error) {
         console.error("Unable to load Firebase SDK modules:", error);
-        setStatus("Firebase SDK could not load. Check your connection and CDN access.", "error");
+        setStatus("Authentication service could not load. Check your connection.", "error");
         throw error;
     }
 
@@ -206,7 +206,7 @@ async function initFirebaseAuth() {
             return;
         }
 
-        setStatus("Ready to sign in with Firebase.", "info");
+        setStatus("Please enter your details to sign in.", "info");
     });
 
     return firebaseAuth;

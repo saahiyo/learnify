@@ -24,7 +24,8 @@
     box-sizing: border-box;
 }
 
-.is-hidden{
+.is-hidden,
+[hidden] {
     display: none !important;
 }
 
@@ -76,17 +77,21 @@ input{
 
 .navbar{
     position: fixed;
-    top: 12px;
-    left: 12px;
-    right: 12px;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1000;
-    width: auto;
-    max-width: none;
-    margin: 0;
+    width: min(1240px, calc(100% - 24px));
     display: flex;
-    justify-content: center;
-    padding: 0 12px 0;
-    border-bottom: 1px solid var(--border);
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 8px 20px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(244, 236, 223, 0.98));
+    color: var(--header-text);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
 #about,
@@ -94,20 +99,6 @@ input{
 #design,
 #contact{
     scroll-margin-top: calc(var(--nav-offset) + 32px);
-}
-
-.navbar-inner{
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 18px;
-    padding: 14px 24px;
-    width: min(1240px, 100%);
-    border-radius: 14px;
-    background: linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(244, 236, 223, 0.96));
-    color: var(--header-text);
-    border: 1px dotted var(--border);
-    box-shadow: none;
 }
 
 .logo{
@@ -561,32 +552,24 @@ ul li a:hover{
 }
 
 .user-profile--header{
-    padding: 8px 10px;
-    gap: 10px;
-    flex-wrap: wrap;
-    max-width: 360px;
+    padding: 4px 8px;
+    gap: 8px;
 }
 
-.nav-user-copy{
-    display: grid;
-    gap: 2px;
-    min-width: 0;
+.user-profile--header .nav-user-name{
+    font-size: 0.85rem;
 }
 
-.nav-user-name{
-    font-weight: 700;
-    line-height: 1.1;
-    color: var(--text-dark);
-    font-size: 0.92rem;
-}
-
-.user-profile--header .auth-email{
-    font-size: 0.78rem;
+.user-profile--header .user-avatar{
+    width: 32px;
+    height: 32px;
+    border-width: 1px;
 }
 
 .user-profile--header .auth-logout{
-    min-height: 36px;
-    padding: 0 12px;
+    min-height: 32px;
+    padding: 0 10px;
+    font-size: 0.8rem;
 }
 
 .user-avatar{
@@ -597,6 +580,28 @@ ul li a:hover{
     border: 2px solid rgba(15, 118, 110, 0.16);
     background: #f4ecdf;
     flex-shrink: 0;
+}
+
+.ghost-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dark);
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    font-size: 0.95rem;
+    min-height: 40px;
+}
+
+.ghost-btn:hover{
+    background: #f4ecdf;
+    border-color: #cebfa9;
 }
 
 .auth-logout{
@@ -1166,13 +1171,11 @@ ul li a:hover{
 
     .navbar{
         top: 10px;
-        left: 10px;
-        right: 10px;
-    }
-
-    .navbar-inner{
-        grid-template-columns: 1fr;
-        gap: 18px;
+        left: 50%;
+        width: calc(100% - 20px);
+        flex-direction: column;
+        gap: 16px;
+        padding: 18px 20px;
     }
 
     .nav-brand,
