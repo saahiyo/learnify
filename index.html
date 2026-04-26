@@ -35,7 +35,7 @@
                 </a>
                 <div class="nav-auth-links" data-auth-guest>
                     <a class="nav-login" href="auth.html#login">Log In</a>
-                    <a class="nav-signup" href="auth.html#signup">Sign Up</a>
+                    <a class="nav-signup" href="#signup" onclick="toggleAuth('signup')">Sign Up</a>
                 </div>
                 <div class="nav-user-profile user-profile user-profile--header" data-auth-user hidden>
                     <img class="user-avatar" data-user-avatar src="" alt="Guest profile picture" hidden>
@@ -106,17 +106,32 @@
                 </a>
 
                 <div data-auth-guest>
-                    <h2>Login Here</h2>
-                    <p class="auth-status" data-auth-status aria-live="polite">Please enter your details to sign in.</p>
-                    <form action="#" method="post" data-login-form>
-                        <input type="email" name="email" placeholder="Enter Email" autocomplete="email" required>
-                        <input type="password" name="password" placeholder="Enter Password" autocomplete="current-password" required>
-                        <button class="btnn" type="submit">Login</button>
-                    </form>
+                    <!-- Login Form -->
+                    <div id="login-form-container">
+                        <h2>Login Here</h2>
+                        <form action="#" method="post" data-login-form>
+                            <input type="email" name="email" placeholder="Enter Email" autocomplete="email" required>
+                            <input type="password" name="password" placeholder="Enter Password" autocomplete="current-password" required>
+                            <button class="btnn" type="submit">Login</button>
+                        </form>
+                        <p class="link">Don't have an account?<br>
+                            <a href="#signup" onclick="toggleAuth('signup')">Sign up here</a>
+                        </p>
+                    </div>
 
-                    <p class="link">Don't have an account?<br>
-                        <a href="auth.html#signup">Sign up here</a>
-                    </p>
+                    <!-- Signup Form (Initially Hidden) -->
+                    <div id="signup-form-container" hidden>
+                        <h2>Create Account</h2>
+                        <form action="#" method="post" data-signup-form>
+                            <input type="text" name="signup-username" placeholder="Username" autocomplete="nickname" required>
+                            <input type="email" name="signup-email" placeholder="Email address" autocomplete="email" required>
+                            <input type="password" name="signup-password" placeholder="Password" autocomplete="new-password" required>
+                            <button class="btnn" type="submit">Sign Up</button>
+                        </form>
+                        <p class="link">Already have an account?<br>
+                            <a href="#login" onclick="toggleAuth('login')">Login here</a>
+                        </p>
+                    </div>
                     
                     <p class="liw">Log in with</p>
 
