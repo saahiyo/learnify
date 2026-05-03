@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>learnify Courses</title>
+    <title>Learnify Courses</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="inner-page">
      <header class="navbar">
             <div class="nav-brand">
-                <a class="brand-mark" href="index.html" aria-label="learnify home">
-                    <span>P</span>
+                <a class="brand-mark" href="index.html" aria-label="Learnify home">
+                    <span>LF</span>
                 </a>
-                <a class="logo" href="index.html">learnify</a>
+                <a class="logo" href="index.html">Learnify</a>
             </div>
 
             <nav class="menu" aria-label="Main navigation">
@@ -37,9 +37,9 @@
                     <a class="nav-signup" href="auth.html#signup">Sign Up</a>
                 </div>
                 <div class="nav-user-profile user-profile user-profile--header" data-auth-user hidden>
-                    <img class="user-avatar" data-user-avatar src="" alt="Guest profile picture" hidden>
+                    <img class="user-avatar" data-user-avatar alt="Guest profile picture" hidden>
                     <span class="nav-user-name" data-user-name>Guest</span>
-                    <a class="ghost-btn auth-logout" href="#" data-logout-link hidden>Sign out</a>
+                    <button class="ghost-btn auth-logout" type="button" data-logout-link hidden>Sign out</button>
                 </div>
             </div>
         </header>
@@ -83,7 +83,7 @@
 
         <section class="page-content">
             <div class="course-grid course-catalog">
-                <article class="course-card course-card-compact course-item" id="web-development-course" data-course-name="web development responsive html css javascript">
+                <article class="course-card course-card-compact course-item" id="web-development-course" data-course-name="web development course responsive html css javascript">
                     <div class="course-card-top">Skill path</div>
                     <div class="course-card-body">
                         <p class="card-meta">Includes 12 courses</p>
@@ -103,7 +103,7 @@
                     </div>
                 </article>
 
-                <article class="course-card course-card-compact course-item" id="full-stack-course" data-course-name="full stack developer frontend backend database">
+                <article class="course-card course-card-compact course-item" id="full-stack-course" data-course-name="full stack developer course frontend backend database">
                     <div class="course-card-top course-card-top-soft">Course</div>
                     <div class="course-card-body">
                         <p class="card-meta">Includes 10 modules</p>
@@ -123,7 +123,7 @@
                     </div>
                 </article>
 
-                <article class="course-card course-card-compact course-item" id="programming-course" data-course-name="basic to advanced programming coding logic problem solving">
+                <article class="course-card course-card-compact course-item" id="programming-course" data-course-name="basic to advanced programming course coding logic problem solving">
                     <div class="course-card-top course-card-top-dark">Career path</div>
                     <div class="course-card-body">
                         <p class="card-meta">Includes 9 modules</p>
@@ -163,7 +163,7 @@
                     </div>
                 </article>
 
-                <article class="course-card course-card-compact course-item" id="java-fullstack-course" data-course-name="java full stack spring boot frontend backend">
+                <article class="course-card course-card-compact course-item" id="java-fullstack-course" data-course-name="java full stack course spring boot frontend backend">
                     <div class="course-card-top course-card-top-dark">Career path</div>
                     <div class="course-card-body">
                         <p class="card-meta">Includes 10 modules</p>
@@ -183,7 +183,7 @@
                     </div>
                 </article>
 
-                <article class="course-card course-card-compact course-item" id="certified-web-course" data-course-name="certified web developer program certificate responsive coding">
+                <article class="course-card course-card-compact course-item" id="certified-web-course" data-course-name="certified web developer program course certificate responsive coding">
                     <div class="course-card-top">Course</div>
                     <div class="course-card-body">
                         <p class="card-meta">Includes 6 modules</p>
@@ -203,7 +203,7 @@
                     </div>
                 </article>
 
-                <article class="course-card course-card-compact course-item" id="software-engineering-course" data-course-name="advanced software engineering software engineering system design testing">
+                <article class="course-card course-card-compact course-item" id="software-engineering-course" data-course-name="advanced software engineering course system design testing">
                     <div class="course-card-top course-card-top-soft">Course</div>
                     <div class="course-card-body">
                         <p class="card-meta">Includes 8 modules</p>
@@ -243,7 +243,7 @@
                     </div>
                 </article>
 
-                <article class="course-card course-card-compact course-item" id="real-project-course" data-course-name="master coding with real project coding practice portfolio">
+                <article class="course-card course-card-compact course-item" id="real-project-course" data-course-name="master coding with real project course coding practice portfolio">
                     <div class="course-card-top course-card-top-soft">Project course</div>
                     <div class="course-card-body">
                         <p class="card-meta">Includes 7 modules</p>
@@ -286,7 +286,8 @@
         </section>
     </main>
 
-    <script src="javascript.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/firebase-auth.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>

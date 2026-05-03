@@ -336,11 +336,13 @@ ul li a:hover{
     justify-content: center;
     min-height: 42px;
     padding: 0 12px;
+    border: 0;
     border-radius: 10px;
     background: var(--accent);
     color: #fff;
     font-size: 0.9rem;
     font-weight: 700;
+    cursor: pointer;
     transition: background 0.2s ease, color 0.2s ease;
 }
 
@@ -355,7 +357,10 @@ ul li a:hover{
 }
 
 .mini-cards{
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 18px;
 }
 
 .mini-card{
@@ -410,7 +415,13 @@ ul li a:hover{
 }
 
 .course-photo-card{
-    display: none;
+    display: block;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-dark);
+    background: #fff;
 }
 
 .course-photo-card img{
@@ -500,7 +511,8 @@ ul li a:hover{
     color: var(--accent);
 }
 
-.auth-status{
+.auth-status,
+.form-status{
     margin: 10px 0 14px;
     padding: 10px 12px;
     border-radius: 10px;
@@ -511,12 +523,14 @@ ul li a:hover{
     line-height: 1.5;
 }
 
-.auth-status[data-status-type="success"]{
+.auth-status[data-status-type="success"],
+.form-status[data-status-type="success"]{
     background: #e4f2ec;
     color: #0f4f49;
 }
 
-.auth-status[data-status-type="error"]{
+.auth-status[data-status-type="error"],
+.form-status[data-status-type="error"]{
     background: #fbe8e8;
     color: #9b1c1c;
 }
@@ -839,7 +853,7 @@ ul li a:hover{
 
 .side-panel{
     position: sticky;
-    top: 20px;
+    top: calc(var(--nav-offset) + 16px);
     align-self: start;
     padding: 24px;
     background: linear-gradient(180deg, #fffdf8 0%, #f4ecdf 100%);
@@ -1100,6 +1114,10 @@ ul li a:hover{
     grid-column: 1 / -1;
 }
 
+.admission-form .form-status{
+    margin: 0 0 4px;
+}
+
 .admission-form label{
     display: grid;
     gap: 8px;
@@ -1316,6 +1334,8 @@ ul li a:hover{
         top: 10px;
         left: 10px;
         right: 10px;
+        width: auto;
+        transform: none;
     }
 
     .hero-section,
@@ -1389,6 +1409,8 @@ ul li a:hover{
         top: 8px;
         left: 8px;
         right: 8px;
+        width: auto;
+        transform: none;
     }
 
     .main,
@@ -1430,6 +1452,11 @@ ul li a:hover{
 
     .hero-search-form .btn{
         border-radius: 12px;
+    }
+
+    .button-row,
+    .price-row{
+        grid-template-columns: 1fr;
     }
 
     .menu ul{

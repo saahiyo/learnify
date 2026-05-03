@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>learnify Auth</title>
+    <title>Learnify Auth</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="inner-page">
     <header class="navbar">
         <div class="nav-brand">
-            <a class="brand-mark" href="index.html" aria-label="learnify home">
-                <span>P</span>
+            <a class="brand-mark" href="index.html" aria-label="Learnify home">
+                <span>LF</span>
             </a>
-            <a class="logo" href="index.html">learnify</a>
+            <a class="logo" href="index.html">Learnify</a>
         </div>
 
         <nav class="menu" aria-label="Main navigation">
@@ -33,9 +33,9 @@
                 <a class="nav-signup" href="#signup">Sign Up</a>
             </div>
             <div class="nav-user-profile user-profile user-profile--header" data-auth-user hidden>
-                <img class="user-avatar" data-user-avatar src="" alt="Guest profile picture" hidden>
+                <img class="user-avatar" data-user-avatar alt="Guest profile picture" hidden>
                 <span class="nav-user-name" data-user-name>Guest</span>
-                <a class="ghost-btn auth-logout" href="#" data-logout-link hidden>Sign out</a>
+                <button class="ghost-btn auth-logout" type="button" data-logout-link hidden>Sign out</button>
             </div>
         </div>
     </header>
@@ -51,14 +51,14 @@
             <div class="side-panel-card">
                 <p class="section-label">Current user</p>
                 <div class="user-profile">
-                    <img class="user-avatar" data-user-avatar src="" alt="Guest profile picture" hidden>
+                    <img class="user-avatar" data-user-avatar alt="Guest profile picture" hidden>
                     <div>
                         <h3 data-user-name>Guest</h3>
                         <p class="user-email" data-user-email>Guest</p>
                     </div>
                 </div>
                 <p>This area updates automatically after you log in.</p>
-                <a class="ghost-btn auth-logout" href="#" data-logout-link hidden>Sign out</a>
+                <button class="ghost-btn auth-logout" type="button" data-logout-link hidden>Sign out</button>
             </div>
         </aside>
 
@@ -82,6 +82,7 @@
                     <h3>Create a new student account</h3>
                     <p>This creates a user profile you can use across the website.</p>
                     <p class="section-note">The password must be at least 6 characters long.</p>
+                    <p class="auth-status" data-auth-status aria-live="polite">Signup ready. Enter your details to create an account.</p>
                     <form class="auth-form" data-signup-form>
                         <input type="text" name="signup-username" placeholder="Username" autocomplete="nickname" required>
                         <input type="email" name="signup-email" placeholder="Email address" autocomplete="email" required>
@@ -93,8 +94,8 @@
         </section>
     </main>
 
-    <script src="javascript.js"></script>
-    <script type="module" src="firebase-auth.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/firebase-auth.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>

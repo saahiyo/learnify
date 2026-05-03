@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>learnify Course Website</title>
+    <title>Learnify Course Website</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <div class="main" id="home">
         <header class="navbar">
             <div class="nav-brand">
-                <a class="brand-mark" href="index.html" aria-label="learnify home">
-                    <span>P</span>
+                <a class="brand-mark" href="index.html" aria-label="Learnify home">
+                    <span>LF</span>
                 </a>
-                <a class="logo" href="index.html">learnify</a>
+                <a class="logo" href="index.html">Learnify</a>
             </div>
 
             <nav class="menu" aria-label="Main navigation">
@@ -35,12 +35,12 @@
                 </a>
                 <div class="nav-auth-links" data-auth-guest>
                     <a class="nav-login" href="auth.html#login">Log In</a>
-                    <a class="nav-signup" href="#signup" onclick="toggleAuth('signup')">Sign Up</a>
+                    <a class="nav-signup" href="#signup" data-auth-toggle="signup">Sign Up</a>
                 </div>
                 <div class="nav-user-profile user-profile user-profile--header" data-auth-user hidden>
-                    <img class="user-avatar" data-user-avatar src="" alt="Guest profile picture" hidden>
+                    <img class="user-avatar" data-user-avatar alt="Guest profile picture" hidden>
                     <span class="nav-user-name" data-user-name>Guest</span>
-                    <a class="ghost-btn auth-logout" href="#" data-logout-link hidden>Sign out</a>
+                    <button class="ghost-btn auth-logout" type="button" data-logout-link hidden>Sign out</button>
                 </div>
             </div>
         </header>
@@ -48,8 +48,8 @@
         <section class="content hero-section">
             <div class="hero-copy">
                 <p class="eyebrow">Creative learning platform</p>
-                <h1>Programming &<br><span>Development</span><br>Courses</h1>
-                <p class="par">Learn web development, full stack, Java, software engineering, and job-ready programming with practical step-by-step training.</p>
+                <h1>Learnify<br><span>Course</span><br>Platform</h1>
+                <p class="par">Explore practical web development courses, choose a learning path, complete admission, and move to payment from one connected student flow.</p>
 
                 <div class="hero-actions">
                     <a class="cn" href="admission.html">JOIN US</a>
@@ -57,40 +57,31 @@
                 </div>
 
                 <form class="search-form hero-search-form" action="#">
-                    <input class="srch" type="search" placeholder="Search web, full stack, Java, software" name="query" aria-label="Search courses" list="course-options">
+                    <input class="srch" type="search" placeholder="Search web, full stack, Java, project" name="query" aria-label="Search courses" list="course-options-home">
                     <button class="btn" type="submit">Search</button>
                 </form>
-                <datalist id="course-options">
+                <datalist id="course-options-home">
                     <option value="Web Development Course"></option>
                     <option value="Full Stack Developer"></option>
-                    <option value="Basic to Advanced Programming"></option>
-                    <option value="IT Skills Master Course"></option>
                     <option value="Java Full Stack"></option>
-                    <option value="Certified Web Developer Program"></option>
-                    <option value="Advanced Software Engineering"></option>
-                    <option value="IT Career Development Course"></option>
-                    <option value="Master Coding With Real Project"></option>
-                    <option value="Job Ready Web Developer Course"></option>
-                    <option value="web development"></option>
-                    <option value="full stack"></option>
-                    <option value="java"></option>
-                    <option value="software engineering"></option>
-                    <option value="real project"></option>
+                    <option value="Software Engineering"></option>
+                    <option value="Portfolio Projects"></option>
+                    <option value="Placement Support"></option>
                 </datalist>
 
                 <div class="mini-cards">
-                    <a class="mini-card" href="courses.html#web-development-course">
-                        <ion-icon name="code-slash-outline"></ion-icon>
+                    <a class="mini-card" href="courses.html?query=web">
+                        <ion-icon name="school-outline"></ion-icon>
                         <div>
                             <h3>Web Development</h3>
-                            <p>Responsive sites, layouts</p>
+                            <p>HTML, CSS, JavaScript</p>
                         </div>
                     </a>
-                    <a class="mini-card" href="courses.html#java-fullstack-course">
-                        <ion-icon name="layers-outline"></ion-icon>
+                    <a class="mini-card" href="courses.html?query=project">
+                        <ion-icon name="sparkles-outline"></ion-icon>
                         <div>
-                            <h3>Java Full Stack</h3>
-                            <p>Frontend to backend</p>
+                            <h3>Project Practice</h3>
+                            <p>Portfolio-ready builds</p>
                         </div>
                     </a>
                 </div>
@@ -98,7 +89,7 @@
 
             <aside class="form" id="login-panel">
                 <a class="course-photo-card" href="courses.html#web-development-course">
-                    <img src="1.jpg" alt="Web design and development course cover">
+                    <img src="assets/images/course-cover.jpg" alt="Web design and development course cover">
                     <div class="course-photo-text">
                         <p>Featured course</p>
                         <h3>Choose from web development, full stack, Java, software, and more</h3>
@@ -106,7 +97,8 @@
                 </a>
 
                 <div data-auth-guest>
-                    <!-- Login Form -->
+                    <p class="auth-status" data-auth-status aria-live="polite">Please enter your details to sign in.</p>
+
                     <div id="login-form-container">
                         <h2>Login Here</h2>
                         <form action="#" method="post" data-login-form>
@@ -115,11 +107,10 @@
                             <button class="btnn" type="submit">Login</button>
                         </form>
                         <p class="link">Don't have an account?<br>
-                            <a href="#signup" onclick="toggleAuth('signup')">Sign up here</a>
+                            <a href="#signup" data-auth-toggle="signup">Sign up here</a>
                         </p>
                     </div>
 
-                    <!-- Signup Form (Initially Hidden) -->
                     <div id="signup-form-container" hidden>
                         <h2>Create Account</h2>
                         <form action="#" method="post" data-signup-form>
@@ -129,29 +120,19 @@
                             <button class="btnn" type="submit">Sign Up</button>
                         </form>
                         <p class="link">Already have an account?<br>
-                            <a href="#login" onclick="toggleAuth('login')">Login here</a>
+                            <a href="#login" data-auth-toggle="login">Login here</a>
                         </p>
-                    </div>
-                    
-                    <p class="liw">Log in with</p>
-
-                    <div class="icons">
-                        <a href="#" aria-label="Facebook"><ion-icon name="logo-facebook"></ion-icon></a>
-                        <a href="#" aria-label="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
-                        <a href="#" aria-label="Twitter"><ion-icon name="logo-twitter"></ion-icon></a>
-                        <a href="#" aria-label="Google"><ion-icon name="logo-google"></ion-icon></a>
-                        <a href="#" aria-label="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
                     </div>
                 </div>
 
                 <div class="user-profile user-profile--compact" data-auth-user hidden>
-                    <img class="user-avatar" data-user-avatar src="" alt="Guest profile picture" hidden>
+                    <img class="user-avatar" data-user-avatar alt="Guest profile picture" hidden>
                     <div>
                         <p class="auth-user">Signed in as <span data-user-name>Guest</span></p>
                         <p class="auth-email" data-user-email>Guest</p>
                     </div>
                 </div>
-                <a class="ghost-btn auth-logout" href="#" data-logout-link hidden>Sign out</a>
+                <button class="ghost-btn auth-logout" type="button" data-logout-link hidden>Sign out</button>
             </aside>
         </section>
     </div>
@@ -163,7 +144,7 @@
         </div>
         <div class="split-layout">
             <div class="photo-panel">
-                <img src="1.jpg" alt="Course preview image for about section">
+                <img src="assets/images/course-cover.jpg" alt="Course preview image for about section">
             </div>
             <div class="text-panel">
                 <p>This course is built for beginners who want to become confident web designers and front-end developers. You will learn how to create beautiful interfaces, organize clean code, and publish responsive websites that look professional on every screen.</p>
@@ -201,7 +182,7 @@
                 <p>Build layouts that adapt beautifully across phone, tablet, and desktop screens.</p>
             </article>
             <article class="service-card course-highlight">
-                <img src="1.jpg" alt="Course service preview image">
+                <img src="assets/images/course-cover.jpg" alt="Course service preview image">
                 <div>
                     <h3>Course Photo Section</h3>
                     <p>Add a strong visual block to show the course on the service page.</p>
@@ -248,15 +229,15 @@
         <div class="contact-box">
             <div>
                 <h3>Enroll in the next batch</h3>
-                <p>Email: hello@learnifycourse.com</p>
+                <p>Email: hello@learnify.com</p>
                 <p>Phone: +91 98765 43210</p>
             </div>
             <a class="cn" href="payments.html">Buy Course</a>
         </div>
     </section>
 
-    <script src="javascript.js"></script>
-    <script type="module" src="firebase-auth.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/firebase-auth.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>

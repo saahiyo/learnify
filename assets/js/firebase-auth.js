@@ -17,13 +17,15 @@ let firebaseAuth = null;
 let firebaseModulesPromise = null;
 
 function setStatus(message, type = "info") {
-    const statusEl = document.querySelector("[data-auth-status]");
-    if (!statusEl) {
+    const statusNodes = document.querySelectorAll("[data-auth-status]");
+    if (!statusNodes.length) {
         return;
     }
 
-    statusEl.textContent = message;
-    statusEl.dataset.statusType = type;
+    statusNodes.forEach((statusEl) => {
+        statusEl.textContent = message;
+        statusEl.dataset.statusType = type;
+    });
 }
 
 function getDisplayName(user) {
@@ -301,7 +303,7 @@ function wireAuthForms() {
 async function boot() {
     wireAuthForms();
 
-    if (!document.querySelector("[data-login-form]") && !document.querySelector("[data-signup-form]")) {
+    if (!document.querySelector("[data-auth-guest], [data-auth-user], [data-login-form], [data-signup-form], [data-logout-link]")) {
         return;
     }
 
