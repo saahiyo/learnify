@@ -255,7 +255,7 @@ ul li a:hover{
 
 .hero-section{
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+    grid-template-columns: 1fr;
     gap: clamp(28px, 4vw, 56px);
     align-items: start;
     margin-bottom: 48px;
@@ -267,8 +267,7 @@ ul li a:hover{
 }
 
 .eyebrow,
-.section-title p,
-.course-photo-text p{
+.section-title p{
     text-transform: uppercase;
     letter-spacing: 0.12em;
     font-size: 0.72rem;
@@ -404,7 +403,7 @@ ul li a:hover{
 
 .form{
     width: 100%;
-    max-width: 460px;
+    max-width: 560px;
     margin-left: auto;
     padding: 32px 36px;
     border: 1px solid var(--border);
@@ -412,31 +411,6 @@ ul li a:hover{
     background: var(--panel);
     backdrop-filter: none;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
-}
-
-.course-photo-card{
-    display: block;
-    overflow: hidden;
-    margin-bottom: 20px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    color: var(--text-dark);
-    background: #fff;
-}
-
-.course-photo-card img{
-    height: 124px;
-    object-fit: cover;
-}
-
-.course-photo-text{
-    padding: 14px;
-}
-
-.course-photo-text h3{
-    margin-top: 6px;
-    font-size: 0.94rem;
-    line-height: 1.28;
 }
 
 .form h2{
@@ -567,8 +541,12 @@ ul li a:hover{
 }
 
 .user-profile--header{
-    padding: 4px 8px;
-    gap: 8px;
+    padding: 0;
+    margin-top: 0;
+    gap: 10px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
 }
 
 .user-profile--header .nav-user-name{
@@ -583,8 +561,15 @@ ul li a:hover{
 
 .user-profile--header .auth-logout{
     min-height: 32px;
-    padding: 0 10px;
+    padding: 0 12px;
     font-size: 0.8rem;
+    background: transparent;
+    border-color: transparent;
+}
+
+.user-profile--header .auth-logout:hover{
+    background: #f1e9dc;
+    border-color: var(--border);
 }
 
 .user-avatar{
@@ -843,7 +828,7 @@ ul li a:hover{
 }
 
 .page-shell{
-    width: min(1180px, 100%);
+    width: min(1320px, 100%);
     margin: 0 auto;
     padding: 72px 24px 96px;
     display: grid;
@@ -925,6 +910,15 @@ ul li a:hover{
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
+}
+
+.course-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.service-option-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
 }
 
 .course-card,
@@ -1087,6 +1081,32 @@ ul li a:hover{
     padding: 24px;
 }
 
+.service-option-grid .info-card,
+.service-option-grid .course-card{
+    min-height: 300px;
+}
+
+.service-option-grid .info-card{
+    display: flex;
+    flex-direction: column;
+}
+
+.service-option-grid .course-card img{
+    height: 220px;
+    object-fit: cover;
+}
+
+.service-option-grid .info-card p,
+.service-option-grid .course-card-body > p{
+    max-width: 34rem;
+}
+
+.service-option-grid .button-row{
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    margin-top: auto;
+    padding-top: 22px;
+}
+
 .info-card ion-icon{
     font-size: 1.7rem;
     color: var(--accent);
@@ -1145,6 +1165,84 @@ ul li a:hover{
 .payment-card{
     display: flex;
     flex-direction: column;
+}
+
+.payment-page-content{
+    align-content: start;
+}
+
+.payment-checkout-grid{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
+    gap: 24px;
+    align-items: start;
+}
+
+.payment-summary-card{
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-summary-card > img{
+    height: 190px;
+    min-height: 0;
+    object-fit: cover;
+    object-position: center 58%;
+}
+
+.checkout-total-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 18px 0;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: linear-gradient(135deg, #e4f2ec, #fffdf8);
+}
+
+.checkout-total-row span{
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.checkout-total-row strong{
+    font-size: 1.35rem;
+    color: var(--text-dark);
+}
+
+.payment-confirm-form{
+    display: grid;
+    gap: 16px;
+    margin-top: 4px;
+}
+
+.payment-confirm-form fieldset{
+    min-width: 0;
+    padding: 0;
+    border: 0;
+}
+
+.payment-confirm-form legend,
+.payment-confirm-form label{
+    display: grid;
+    gap: 10px;
+    font-weight: 800;
+    color: var(--text-dark);
+}
+
+.payment-confirm-form legend{
+    margin-bottom: 10px;
+}
+
+.payment-confirm-form input{
+    min-height: 48px;
+    padding: 0 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--text-dark);
 }
 
 .qr-payment-card{
@@ -1209,6 +1307,50 @@ ul li a:hover{
     display: grid;
     gap: 14px;
     margin-top: 16px;
+}
+
+.payment-method-options{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 0;
+}
+
+.payment-method{
+    width: 100%;
+    min-height: 68px;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+}
+
+.payment-method-options .payment-method{
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 16px;
+}
+
+.payment-method-options .payment-method span,
+.payment-method-options .payment-method strong{
+    line-height: 1.25;
+}
+
+.payment-method.is-selected{
+    border-color: var(--accent);
+    background: #e4f2ec;
+    color: var(--text-dark);
+    box-shadow: inset 0 0 0 1px rgba(15, 118, 110, 0.25);
+}
+
+.payment-actions{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.payment-actions .cn,
+.payment-actions .ghost-btn{
+    min-height: 48px;
+    width: 100%;
 }
 
 .upi-box{
@@ -1313,7 +1455,7 @@ ul li a:hover{
     }
 
     .form{
-        max-width: 420px;
+        max-width: 560px;
         margin-left: 0;
     }
 
@@ -1370,7 +1512,7 @@ ul li a:hover{
     }
 
     .form{
-        max-width: 420px;
+        max-width: 560px;
         margin-left: 0;
     }
 
@@ -1389,6 +1531,20 @@ ul li a:hover{
 
     .qr-details{
         grid-template-columns: 1fr;
+    }
+
+    .payment-checkout-grid,
+    .payment-summary-card{
+        grid-template-columns: 1fr;
+    }
+
+    .payment-checkout-grid{
+        display: grid;
+    }
+
+    .payment-summary-card > img{
+        min-height: 240px;
+        max-height: 320px;
     }
 
     .side-panel{
@@ -1459,6 +1615,11 @@ ul li a:hover{
         grid-template-columns: 1fr;
     }
 
+    .payment-method-options,
+    .payment-actions{
+        grid-template-columns: 1fr;
+    }
+
     .menu ul{
         gap: 14px 18px;
     }
@@ -1493,13 +1654,9 @@ ul li a:hover{
     }
 
     .hero-section{
-        grid-template-columns: minmax(0, 1fr) 340px;
         gap: 40px;
         padding-top: 12px;
         padding-bottom: 16px;
     }
 
-    .course-photo-card img{
-        height: 110px;
-    }
 }

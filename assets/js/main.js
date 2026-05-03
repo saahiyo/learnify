@@ -3,6 +3,7 @@ const courseItems = document.querySelectorAll(".course-item");
 const courseSearchInput = document.querySelector("#course-search");
 const admissionForm = document.querySelector("[data-admission-form]");
 const paymentStatus = document.querySelector("[data-payment-status]");
+let selectedPaymentMethod = "UPI transaction";
 
 const storageKeys = {
     admission: "learnify_admission",
@@ -226,31 +227,94 @@ function hydratePaymentSummary() {
     }
 }
 
-function wirePaymentConfirmation() {
-    const confirmPaymentLink = document.querySelector("[data-confirm-payment]");
+function setPaymentMethod(method) {
+    selectedPaymentMethod = method || "UPI transaction";
 
-    if (!confirmPaymentLink) {
+    document.querySelectorAll("[data-payment-method]").forEach((button) => {
+        const isSelected = button.dataset.paymentMethod === selectedPaymentMethod;
+        button.classList.toggle("is-selected", isSelected);
+        button.setAttribute("aria-pressed", String(isSelected));
+    });
+
+    if (paymentStatus) {
+        setInlineStatus(paymentStatus, `${selectedPaymentMethod} selected. Enter the transaction ID or payment note after paying.`, "info");
+    }
+}
+
+function wirePaymentMethods() {
+    document.querySelectorAll("[data-payment-method]").forEach((button) => {
+        button.addEventListener("click", () => {
+            setPaymentMethod(button.dataset.paymentMethod);
+        });
+    });
+}
+
+async function copyUpiId() {
+    const upiId = document.querySelector("[data-upi-id]")?.textContent.trim() || "learnify@upi";
+
+    try {
+        await navigator.clipboard.writeText(upiId);
+        setInlineStatus(paymentStatus, `Copied ${upiId}.`, "success");
+    } catch (error) {
+        setInlineStatus(paymentStatus, `UPI ID: ${upiId}`, "info");
+    }
+}
+
+function wireCopyUpi() {
+    const copyButton = document.querySelector("[data-copy-upi]");
+
+    if (!copyButton) {
         return;
     }
 
-    confirmPaymentLink.addEventListener("click", (event) => {
+    copyButton.addEventListener("click", copyUpiId);
+}
+
+function wirePaymentConfirmation() {
+    const paymentForm = document.querySelector("[data-payment-form]");
+
+    if (!paymentForm) {
+        return;
+    }
+
+    const transactionInput = paymentForm.querySelector("[data-transaction-id]");
+    const previousPayment = readJson(storageKeys.payment);
+
+    if (previousPayment?.transactionId && transactionInput) {
+        transactionInput.value = previousPayment.transactionId;
+    }
+
+    if (previousPayment?.method) {
+        setPaymentMethod(previousPayment.method);
+    }
+
+    paymentForm.addEventListener("submit", (event) => {
         event.preventDefault();
+
+        if (!paymentForm.reportValidity()) {
+            return;
+        }
 
         const admission = readJson(storageKeys.admission) || {};
         const courseName = document.querySelector("[data-selected-course]")?.textContent.trim() || "selected course";
+        const transactionId = transactionInput?.value.trim() || "";
 
         writeJson(storageKeys.payment, {
             course: courseName,
             student: admission.fullName || "",
+            method: selectedPaymentMethod,
+            transactionId,
             confirmedAt: new Date().toISOString(),
         });
 
-        setInlineStatus(paymentStatus, "Payment confirmation saved. Contact the team with your transaction ID if needed.", "success");
+        setInlineStatus(paymentStatus, `Payment confirmation saved for ${selectedPaymentMethod}. Transaction ID: ${transactionId}.`, "success");
     });
 }
 
 wireAdmissionForm();
 hydratePaymentSummary();
+wirePaymentMethods();
+wireCopyUpi();
 wirePaymentConfirmation();
 
 window.toggleAuth = toggleAuth;

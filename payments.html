@@ -59,36 +59,57 @@
             </div>
         </aside>
 
-        <section class="page-content">
-            <div class="payment-grid">
-                <article class="payment-card">
+        <section class="page-content payment-page-content">
+            <div class="payment-checkout-grid">
+                <article class="payment-card payment-summary-card">
                     <img src="assets/images/course-cover.jpg" alt="Course checkout image">
                     <div class="payment-card-body">
                         <p class="card-meta">Selected course</p>
                         <h3 data-selected-course>Programming and development course pack</h3>
                         <p data-selected-summary>Includes web design, front-end development, programming, projects, and career support learning tracks.</p>
                         <p class="form-status" data-payment-status aria-live="polite">Complete payment, then confirm with your name and selected course.</p>
-                        <div class="price-row">
-                            <span class="price-tag" data-payment-amount>Rs. 2,999</span>
-                            <a class="cn" href="contact.html" data-confirm-payment>Confirm Purchase</a>
+                        <div class="checkout-total-row">
+                            <span>Total amount</span>
+                            <strong data-payment-amount>Rs. 2,999</strong>
                         </div>
-                    </div>
-                </article>
-
-                <article class="payment-card">
-                    <div class="payment-card-body">
-                        <p class="card-meta">Payment methods</p>
-                        <h3>Choose how you want to pay</h3>
-                        <div class="payment-methods">
-                            <div class="payment-method"><span>UPI transaction</span><strong>Instant</strong></div>
-                            <div class="payment-method"><span>Debit card</span><strong>Available</strong></div>
-                            <div class="payment-method"><span>Credit card</span><strong>Available</strong></div>
-                            <div class="payment-method"><span>Net banking</span><strong>Available</strong></div>
-                            <div class="payment-method"><span>Wallet payment</span><strong>Available</strong></div>
-                        </div>
+                        <form class="payment-confirm-form" data-payment-form>
+                            <fieldset>
+                                <legend>Payment method</legend>
+                                <div class="payment-methods payment-method-options">
+                                    <button class="payment-method is-selected" type="button" data-payment-method="UPI transaction" aria-pressed="true">
+                                        <span>UPI transaction</span>
+                                        <strong>Instant</strong>
+                                    </button>
+                                    <button class="payment-method" type="button" data-payment-method="Debit card" aria-pressed="false">
+                                        <span>Debit card</span>
+                                        <strong>Available</strong>
+                                    </button>
+                                    <button class="payment-method" type="button" data-payment-method="Credit card" aria-pressed="false">
+                                        <span>Credit card</span>
+                                        <strong>Available</strong>
+                                    </button>
+                                    <button class="payment-method" type="button" data-payment-method="Net banking" aria-pressed="false">
+                                        <span>Net banking</span>
+                                        <strong>Available</strong>
+                                    </button>
+                                    <button class="payment-method" type="button" data-payment-method="Wallet payment" aria-pressed="false">
+                                        <span>Wallet payment</span>
+                                        <strong>Available</strong>
+                                    </button>
+                                </div>
+                            </fieldset>
+                            <label>
+                                Transaction ID or note
+                                <input type="text" name="transactionId" data-transaction-id placeholder="Example: UPI12345 or your payment note" required>
+                            </label>
+                            <div class="payment-actions">
+                                <button class="cn" type="submit" data-confirm-payment>Confirm Purchase</button>
+                                <button class="ghost-btn" type="button" data-copy-upi>Copy UPI ID</button>
+                            </div>
+                        </form>
                         <div class="upi-box">
                             <p class="section-label">UPI payment details</p>
-                            <h3>Send to learnify@upi</h3>
+                            <h3>Send to <span data-upi-id>learnify@upi</span></h3>
                             <p>Reference note: your name + selected course name</p>
                         </div>
                     </div>
@@ -104,7 +125,7 @@
                         <div class="qr-details">
                             <div>
                                 <p class="section-label">UPI ID</p>
-                                <strong>learnify@upi</strong>
+                                <strong data-upi-id>learnify@upi</strong>
                             </div>
                             <div>
                                 <p class="section-label">Amount</p>

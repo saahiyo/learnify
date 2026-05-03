@@ -15,6 +15,70 @@ const firebaseModuleUrls = {
 
 let firebaseAuth = null;
 let firebaseModulesPromise = null;
+const authCookieName = "learnify_auth_state";
+const authCookieMaxAge = 60 * 60 * 24 * 30;
+
+function setCookie(name, value, maxAgeSeconds) {
+    document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${maxAgeSeconds}; SameSite=Lax`;
+}
+
+function clearCookie(name) {
+    document.cookie = `${name}=; path=/; max-age=0; SameSite=Lax`;
+}
+
+function getCookie(name) {
+    const prefix = `${name}=`;
+    const match = document.cookie
+        .split(";")
+        .map((item) => item.trim())
+        .find((item) => item.startsWith(prefix));
+
+    return match ? decodeURIComponent(match.slice(prefix.length)) : "";
+}
+
+function getStoredAuthState() {
+    const rawState = getCookie(authCookieName);
+
+    if (!rawState) {
+        return null;
+    }
+
+    try {
+        return JSON.parse(rawState);
+    } catch (error) {
+        clearCookie(authCookieName);
+        return null;
+    }
+}
+
+function storeAuthState(user) {
+    if (!user) {
+        clearCookie(authCookieName);
+        return;
+    }
+
+    const state = {
+        displayName: getDisplayName(user),
+        email: user.email || "",
+        photoURL: user.photoURL || "",
+    };
+
+    setCookie(authCookieName, JSON.stringify(state), authCookieMaxAge);
+}
+
+function getStoredUser() {
+    const state = getStoredAuthState();
+
+    if (!state?.email) {
+        return null;
+    }
+
+    return {
+        displayName: state.displayName || "",
+        email: state.email,
+        photoURL: state.photoURL || "",
+    };
+}
 
 function setStatus(message, type = "info") {
     const statusNodes = document.querySelectorAll("[data-auth-status]");
@@ -201,6 +265,7 @@ async function initFirebaseAuth() {
     }
 
     onAuthStateChanged(firebaseAuth, (user) => {
+        storeAuthState(user);
         setLoggedInState(user);
 
         if (user) {
@@ -306,6 +371,8 @@ async function boot() {
     if (!document.querySelector("[data-auth-guest], [data-auth-user], [data-login-form], [data-signup-form], [data-logout-link]")) {
         return;
     }
+
+    setLoggedInState(getStoredUser());
 
     try {
         await initFirebaseAuth();
