@@ -82,6 +82,20 @@
         </aside>
 
         <section class="page-content">
+            <div class="catalog-toolbar">
+                <div>
+                    <p class="section-label">Course catalog</p>
+                    <h1>Find the right learning path</h1>
+                </div>
+                <p class="catalog-count" data-course-count aria-live="polite">Showing all courses</p>
+            </div>
+            <div class="filter-chip-row" aria-label="Popular course searches">
+                <button type="button" data-course-query="web">Web</button>
+                <button type="button" data-course-query="full stack">Full stack</button>
+                <button type="button" data-course-query="java">Java</button>
+                <button type="button" data-course-query="project">Projects</button>
+                <button type="button" data-course-query="">All</button>
+            </div>
             <div class="course-grid course-catalog">
                 <article class="course-card course-card-compact course-item" id="web-development-course" data-course-name="web development course responsive html css javascript">
                     <div class="course-card-top">Skill path</div>
@@ -282,6 +296,12 @@
                         </div>
                     </div>
                 </article>
+            </div>
+            <div class="empty-state is-hidden" data-course-empty>
+                <ion-icon name="search-outline"></ion-icon>
+                <h3>No matching courses</h3>
+                <p>Try a broader word like web, java, project, or full stack.</p>
+                <button class="ghost-btn" type="button" data-course-query="">Show all courses</button>
             </div>
         </section>
     </main>

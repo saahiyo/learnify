@@ -1,6 +1,8 @@
 const searchForms = document.querySelectorAll(".search-form");
 const courseItems = document.querySelectorAll(".course-item");
 const courseSearchInput = document.querySelector("#course-search");
+const courseCount = document.querySelector("[data-course-count]");
+const courseEmptyState = document.querySelector("[data-course-empty]");
 const admissionForm = document.querySelector("[data-admission-form]");
 const paymentStatus = document.querySelector("[data-payment-status]");
 let selectedPaymentMethod = "UPI transaction";
@@ -10,6 +12,21 @@ const storageKeys = {
     selectedCourse: "learnify_selected_course",
     payment: "learnify_payment_confirmation",
 };
+
+function markActiveNavigation() {
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+    document.querySelectorAll(".menu a").forEach((link) => {
+        const linkPage = new URL(link.href, window.location.href).pathname.split("/").pop() || "index.html";
+        const isActive = linkPage === currentPage;
+
+        link.classList.toggle("is-active", isActive);
+
+        if (isActive) {
+            link.setAttribute("aria-current", "page");
+        }
+    });
+}
 
 function readJson(key) {
     try {
@@ -42,12 +59,26 @@ function applyCourseFilter(query) {
     }
 
     const queryTokens = getSearchTokens(query);
+    let visibleCount = 0;
 
     courseItems.forEach((item) => {
         const keywords = (item.dataset.courseName || "").toLowerCase();
         const visible = !queryTokens.length || queryTokens.every((token) => keywords.includes(token));
         item.style.display = visible ? "" : "none";
+        visibleCount += visible ? 1 : 0;
     });
+
+    if (courseCount) {
+        courseCount.textContent = queryTokens.length
+            ? `${visibleCount} course${visibleCount === 1 ? "" : "s"} for "${query}"`
+            : `Showing all ${courseItems.length} courses`;
+    }
+
+    if (courseEmptyState) {
+        courseEmptyState.classList.toggle("is-hidden", visibleCount !== 0);
+    }
+
+    syncCourseQueryButtons(query);
 }
 
 function updateCourseUrl(query) {
@@ -60,6 +91,14 @@ function updateCourseUrl(query) {
     }
 
     window.history.replaceState({}, "", url);
+}
+
+function syncCourseQueryButtons(query) {
+    document.querySelectorAll("[data-course-query]").forEach((button) => {
+        const isSelected = (button.dataset.courseQuery || "") === query;
+        button.classList.toggle("is-selected", isSelected);
+        button.setAttribute("aria-pressed", String(isSelected));
+    });
 }
 
 searchForms.forEach((form) => {
@@ -87,6 +126,19 @@ if (courseSearchInput) {
     courseSearchInput.value = query;
     applyCourseFilter(query);
 }
+
+document.querySelectorAll("[data-course-query]").forEach((button) => {
+    button.addEventListener("click", () => {
+        const query = button.dataset.courseQuery || "";
+
+        if (courseSearchInput) {
+            courseSearchInput.value = query;
+        }
+
+        applyCourseFilter(query);
+        updateCourseUrl(query);
+    });
+});
 
 function toggleAuth(mode, options = {}) {
     const loginContainer = document.getElementById("login-form-container");
@@ -145,6 +197,64 @@ function setInlineStatus(node, message, type = "info") {
 
     node.textContent = message;
     node.dataset.statusType = type;
+}
+
+function formatStoredDate(dateValue) {
+    if (!dateValue) {
+        return "";
+    }
+
+    const date = new Date(dateValue);
+
+    if (Number.isNaN(date.getTime())) {
+        return "";
+    }
+
+    return date.toLocaleString("en-IN", {
+        dateStyle: "medium",
+        timeStyle: "short",
+    });
+}
+
+function getPaymentAmountForCourse(courseName) {
+    return courseName === "Job Ready Web Developer Course" ? "Free" : "Rs. 2,999";
+}
+
+function renderOrderSummary() {
+    const orderSummary = document.querySelector("[data-order-summary]");
+
+    if (!orderSummary) {
+        return;
+    }
+
+    const orderTitle = orderSummary.querySelector("[data-order-title]");
+    const orderDetails = orderSummary.querySelector("[data-order-details]");
+    const orderStatus = orderSummary.querySelector("[data-order-status]");
+    const cancelButton = orderSummary.querySelector("[data-cancel-order]");
+    const payment = readJson(storageKeys.payment);
+
+    orderSummary.hidden = false;
+
+    if (!payment?.transactionId) {
+        orderTitle.textContent = "No confirmed order yet";
+        orderDetails.textContent = "Confirm your purchase to create an order.";
+        orderStatus.textContent = "Pending";
+        orderStatus.dataset.orderState = "pending";
+        cancelButton.hidden = true;
+        return;
+    }
+
+    const isCanceled = payment.status === "canceled";
+    const statusText = isCanceled ? "Canceled" : "Confirmed";
+    const statusDate = formatStoredDate(isCanceled ? payment.canceledAt : payment.confirmedAt);
+    const amountText = payment.amount ? ` Amount: ${payment.amount}.` : "";
+    const dateText = statusDate ? ` ${statusText} on ${statusDate}.` : "";
+
+    orderTitle.textContent = payment.course || "Selected course";
+    orderDetails.textContent = `${payment.method || "Payment"} reference ${payment.transactionId}.${amountText}${dateText}`;
+    orderStatus.textContent = statusText;
+    orderStatus.dataset.orderState = isCanceled ? "canceled" : "confirmed";
+    cancelButton.hidden = isCanceled;
 }
 
 function hydrateAdmissionForm() {
@@ -208,7 +318,7 @@ function hydratePaymentSummary() {
     const courseName = admission.course || selectedCourse.course;
     const selectedSummary = document.querySelector("[data-selected-summary]");
     const amountNodes = document.querySelectorAll("[data-payment-amount]");
-    const amountText = courseName === "Job Ready Web Developer Course" ? "Free" : "Rs. 2,999";
+    const amountText = getPaymentAmountForCourse(courseName);
 
     if (courseName) {
         selectedCourseNode.textContent = courseName;
@@ -225,6 +335,8 @@ function hydratePaymentSummary() {
     if (courseName) {
         setInlineStatus(paymentStatus, `Payment is ready for ${courseName}. Use your name as the payment note.`, "success");
     }
+
+    renderOrderSummary();
 }
 
 function setPaymentMethod(method) {
@@ -298,23 +410,55 @@ function wirePaymentConfirmation() {
         const admission = readJson(storageKeys.admission) || {};
         const courseName = document.querySelector("[data-selected-course]")?.textContent.trim() || "selected course";
         const transactionId = transactionInput?.value.trim() || "";
+        const amount = getPaymentAmountForCourse(courseName);
 
         writeJson(storageKeys.payment, {
             course: courseName,
             student: admission.fullName || "",
             method: selectedPaymentMethod,
             transactionId,
+            amount,
+            status: "confirmed",
             confirmedAt: new Date().toISOString(),
         });
 
         setInlineStatus(paymentStatus, `Payment confirmation saved for ${selectedPaymentMethod}. Transaction ID: ${transactionId}.`, "success");
+        renderOrderSummary();
     });
 }
 
+function wireOrderCancellation() {
+    const cancelButton = document.querySelector("[data-cancel-order]");
+
+    if (!cancelButton) {
+        return;
+    }
+
+    cancelButton.addEventListener("click", () => {
+        const payment = readJson(storageKeys.payment);
+
+        if (!payment?.transactionId || payment.status === "canceled") {
+            renderOrderSummary();
+            return;
+        }
+
+        writeJson(storageKeys.payment, {
+            ...payment,
+            status: "canceled",
+            canceledAt: new Date().toISOString(),
+        });
+
+        setInlineStatus(paymentStatus, `Order canceled for ${payment.course || "selected course"}.`, "success");
+        renderOrderSummary();
+    });
+}
+
+markActiveNavigation();
 wireAdmissionForm();
 hydratePaymentSummary();
 wirePaymentMethods();
 wireCopyUpi();
 wirePaymentConfirmation();
+wireOrderCancellation();
 
 window.toggleAuth = toggleAuth;
