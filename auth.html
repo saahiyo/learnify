@@ -23,7 +23,8 @@
                 <li><a href="index.html">Overview</a></li>
                 <li><a href="courses.html">Courses</a></li>
                 <li><a href="payments.html">Payments</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.html#contact">Contact Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
 
@@ -40,30 +41,9 @@
         </div>
     </header>
 
-    <main class="page-shell">
-        <aside class="side-panel">
-            <h3>Account setup</h3>
-            <div class="side-panel-links">
-                <a href="#login">1. Sign in <ion-icon name="log-in-outline"></ion-icon></a>
-                <a href="#signup">2. Create account <ion-icon name="person-add-outline"></ion-icon></a>
-                <a href="payments.html">3. Continue payment <ion-icon name="card-outline"></ion-icon></a>
-            </div>
-            <div class="side-panel-card">
-                <p class="section-label">Current user</p>
-                <div class="user-profile">
-                    <img class="user-avatar" data-user-avatar alt="Guest profile picture" hidden>
-                    <div>
-                        <h3 data-user-name>Guest</h3>
-                        <p class="user-email" data-user-email>Guest</p>
-                    </div>
-                </div>
-                <p>This area updates automatically after you log in.</p>
-                <button class="ghost-btn auth-logout" type="button" data-logout-link hidden>Sign out</button>
-            </div>
-        </aside>
-
+    <main style="max-width: 520px; margin: 60px auto; padding: 24px; display: block;">
         <section class="page-content">
-            <div class="auth-layout">
+            <div style="display: grid; gap: 24px; grid-template-columns: 1fr;">
                 <article class="auth-card" id="login">
                     <p class="section-label">Login</p>
                     <h3>Sign in to your account</h3>
@@ -75,6 +55,11 @@
                         <input type="password" name="password" placeholder="Password" autocomplete="current-password" required>
                         <button class="cn" type="submit">Login</button>
                     </form>
+                    <div class="auth-divider"><span>or</span></div>
+                    <button class="google-auth-btn" type="button" data-google-auth>
+                        <span class="google-auth-mark">G</span>
+                        Continue with Google
+                    </button>
                 </article>
 
                 <article class="auth-card" id="signup">
@@ -89,6 +74,11 @@
                         <input type="password" name="signup-password" placeholder="Password" autocomplete="new-password" required>
                         <button class="cn" type="submit">Create account</button>
                     </form>
+                    <div class="auth-divider"><span>or</span></div>
+                    <button class="google-auth-btn" type="button" data-google-auth>
+                        <span class="google-auth-mark">G</span>
+                        Continue with Google
+                    </button>
                 </article>
             </div>
         </section>

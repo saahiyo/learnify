@@ -25,6 +25,7 @@
                     <li><a href="courses.html">Courses</a></li>
                     <li><a href="services.html">Why Choose Us</a></li>
                     <li><a href="about.html">Success Stories</a></li>
+                    <li><a href="index.html#contact">Contact Us</a></li>
                     <li><a href="contact.html">Enroll Now</a></li>
                 </ul>
             </nav>
@@ -88,6 +89,14 @@
             </div>
 
             <div class="hero-learning-panel" aria-label="Featured Learnify course path">
+                <div class="hero-live-card">
+                    <div class="live-dot" aria-hidden="true"></div>
+                    <div>
+                        <span>Next live class</span>
+                        <strong>Today, 7:00 PM</strong>
+                    </div>
+                    <ion-icon name="videocam-outline" aria-hidden="true"></ion-icon>
+                </div>
                 <div class="hero-panel-header">
                     <div>
                         <p class="eyebrow">Featured path</p>
@@ -102,6 +111,20 @@
                         <strong>3 steps to enroll</strong>
                     </div>
                     <div class="progress-track" aria-hidden="true"><span></span></div>
+                </div>
+                <div class="hero-metric-row" aria-label="Course path highlights">
+                    <div>
+                        <strong>12</strong>
+                        <span>Lessons</span>
+                    </div>
+                    <div>
+                        <strong>6</strong>
+                        <span>Projects</span>
+                    </div>
+                    <div>
+                        <strong>1:1</strong>
+                        <span>Support</span>
+                    </div>
                 </div>
                 <div class="path-steps">
                     <a href="courses.html">
@@ -226,16 +249,43 @@
 
     <section class="info-section contact-section" id="contact">
         <div class="section-title">
-            <p>Contact</p>
-            <h2>Start your web design and development journey today</h2>
+            <p>Contact Us</p>
+            <h2>Get in touch with our team</h2>
         </div>
-        <div class="contact-box">
-            <div>
-                <h3>Enroll in the next batch</h3>
-                <p>Email: hello@learnify.com</p>
-                <p>Phone: +91 98765 43210</p>
+        <div class="split-layout">
+            <div class="text-panel">
+                <p style="color: var(--muted); line-height: 1.6; margin-bottom: 24px;">We're here to help and answer any questions you might have. Fill out the form or reach us via our contact details.</p>
+                <div class="feature-list">
+                    <article>
+                        <ion-icon name="mail-outline"></ion-icon>
+                        <h3>Email Us</h3>
+                        <p>hello@learnify.com</p>
+                    </article>
+                    <article>
+                        <ion-icon name="call-outline"></ion-icon>
+                        <h3>Call Us</h3>
+                        <p>+91 98765 43210</p>
+                    </article>
+                    <article>
+                        <ion-icon name="location-outline"></ion-icon>
+                        <h3>Visit Us</h3>
+                        <p>Kolkata, India</p>
+                    </article>
+                </div>
             </div>
-            <a class="cn" href="payments.html">Buy Course</a>
+            <div class="form-panel" style="display: flex; align-items: center;">
+                <div class="form" style="max-width: 100%; margin: 0; padding: 32px;">
+                    <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                        <div style="display: grid; gap: 14px;">
+                            <input type="text" name="name" placeholder="Your Full Name" required>
+                            <input type="email" name="email" placeholder="Your Email Address" required>
+                            <input type="text" name="subject" placeholder="Subject" required>
+                            <textarea name="message" placeholder="Type your message here..." style="width: 100%; height: 120px; background: #ffffff; border: 1px solid var(--border); border-radius: 8px; color: var(--text-dark); font-size: 1rem; padding: 12px 18px; font-family: inherit; resize: vertical;" required></textarea>
+                            <button class="btnn" type="submit" style="margin-top: 8px;">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 

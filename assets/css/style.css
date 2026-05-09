@@ -270,7 +270,7 @@ ul li a:hover{
     gap: clamp(28px, 4vw, 56px);
     align-items: center;
     margin-bottom: 28px;
-    padding-top: clamp(18px, 4vw, 58px);
+    padding-top: clamp(10px, 2vw, 24px);
 }
 
 .hero-copy{
@@ -295,8 +295,8 @@ ul li a:hover{
 }
 
 .content h1{
-    font-size: clamp(2.7rem, 6.2vw, 6.5rem);
-    margin: 12px 0 16px;
+    font-size: clamp(2.4rem, 4.8vw, 4.8rem);
+    margin: 6px 0 10px;
     line-height: 0.92;
     max-width: 760px;
 }
@@ -418,12 +418,50 @@ ul li a:hover{
 .hero-learning-panel{
     position: relative;
     display: grid;
-    gap: 16px;
-    padding: 18px;
+    gap: 12px;
+    padding: 14px;
     border: 1px solid var(--border);
     border-radius: 8px;
     background: #ffffff;
     box-shadow: var(--shadow);
+}
+
+.hero-live-card{
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #17322e, #0f766e);
+    color: #fff;
+}
+
+.hero-live-card span,
+.hero-metric-row span{
+    display: block;
+    color: inherit;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    opacity: 0.78;
+}
+
+.hero-live-card strong{
+    display: block;
+    margin-top: 2px;
+    font-size: 0.96rem;
+}
+
+.hero-live-card ion-icon{
+    font-size: 1.35rem;
+}
+
+.live-dot{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--warning);
+    box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.18);
 }
 
 .hero-panel-header{
@@ -452,7 +490,7 @@ ul li a:hover{
 }
 
 .hero-learning-panel > img{
-    height: 300px;
+    height: 180px;
     object-fit: cover;
     border-radius: 8px;
 }
@@ -488,6 +526,32 @@ ul li a:hover{
     width: 72%;
     height: 100%;
     background: linear-gradient(90deg, var(--accent), var(--warning));
+}
+
+.hero-metric-row{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.hero-metric-row div{
+    min-height: 74px;
+    padding: 13px 12px;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #ffffff, #f6f9fb);
+    border: 1px solid var(--border);
+}
+
+.hero-metric-row strong{
+    display: block;
+    margin-bottom: 3px;
+    font-size: 1.2rem;
+    color: var(--text-dark);
+}
+
+.hero-metric-row span{
+    color: var(--muted);
+    opacity: 1;
 }
 
 .path-steps{
@@ -1276,7 +1340,7 @@ ul li a:hover{
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 8px;
-    margin-top: 0;
+    margin-top: auto;
 }
 
 .price-tag{
@@ -1581,7 +1645,7 @@ ul li a:hover{
 
 .qr-details{
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 14px;
 }
 
@@ -1596,6 +1660,7 @@ ul li a:hover{
     display: block;
     margin-top: 6px;
     font-size: 1rem;
+    word-break: break-all;
 }
 
 .qr-note{
@@ -2062,4 +2127,8 @@ ul li a:hover{
         padding-bottom: 16px;
     }
 
+}
+
+.button-row > *:only-child {
+    grid-column: 1 / -1;
 }

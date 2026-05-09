@@ -141,8 +141,8 @@ document.querySelectorAll("[data-course-query]").forEach((button) => {
 });
 
 function toggleAuth(mode, options = {}) {
-    const loginContainer = document.getElementById("login-form-container");
-    const signupContainer = document.getElementById("signup-form-container");
+    const loginContainer = document.getElementById("login");
+    const signupContainer = document.getElementById("signup");
 
     if (!loginContainer || !signupContainer) {
         return;
@@ -332,6 +332,26 @@ function hydratePaymentSummary() {
         amountNode.textContent = amountText;
     });
 
+    const qrImage = document.querySelector('.qr-frame img');
+    if (qrImage) {
+        const upiId = "mohdsaifshekh400@okhdfcbank";
+        const upiName = "Mohd saif Shekh";
+        
+        let numericMatch = amountText.match(/\d+[.,\d]*/);
+        let amountValue = numericMatch ? numericMatch[0].replace(/,/g, '') : '';
+        
+        if (amountValue && !amountValue.includes('.')) {
+            amountValue += ".00";
+        }
+        
+        let upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(upiName)}&cu=INR`;
+        if (amountValue) {
+            upiUrl += `&am=${amountValue}`;
+        }
+        
+        qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(upiUrl)}`;
+    }
+
     if (courseName) {
         setInlineStatus(paymentStatus, `Payment is ready for ${courseName}. Use your name as the payment note.`, "success");
     }
@@ -362,7 +382,7 @@ function wirePaymentMethods() {
 }
 
 async function copyUpiId() {
-    const upiId = document.querySelector("[data-upi-id]")?.textContent.trim() || "learnify@upi";
+    const upiId = document.querySelector("[data-upi-id]")?.textContent.trim() || "mohdsaifshekh400@okhdfcbank";
 
     try {
         await navigator.clipboard.writeText(upiId);

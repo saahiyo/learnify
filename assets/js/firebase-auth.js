@@ -204,7 +204,13 @@ function getFriendlyAuthMessage(error) {
         case "auth/network-request-failed":
             return "Could not reach the network. Please check your internet connection.";
         case "auth/operation-not-allowed":
-            return "Email/Password sign-in is not currently enabled.";
+            return "This sign-in method is not currently enabled.";
+        case "auth/popup-blocked":
+            return "The sign-in popup was blocked. Redirecting to Google sign-in...";
+        case "auth/popup-closed-by-user":
+            return "Google sign-in was closed before it finished.";
+        case "auth/account-exists-with-different-credential":
+            return "An account already exists with this email using another sign-in method.";
         case "auth/user-not-found":
         case "auth/wrong-password":
         case "auth/invalid-credential":
@@ -276,6 +282,19 @@ async function initFirebaseAuth() {
         setStatus("Please enter your details to sign in.", "info");
     });
 
+    try {
+        const { getRedirectResult } = authModule;
+        const redirectCredential = await getRedirectResult(firebaseAuth);
+
+        if (redirectCredential?.user) {
+            storeAuthState(redirectCredential.user);
+            setLoggedInState(redirectCredential.user);
+            setStatus(`Signed in with Google as ${redirectCredential.user.email}.`, "success");
+        }
+    } catch (error) {
+        setStatus(getFriendlyAuthMessage(error), "error");
+    }
+
     return firebaseAuth;
 }
 
@@ -334,6 +353,42 @@ async function handleSignup(event) {
     }
 }
 
+async function handleGoogleAuth(event) {
+    event.preventDefault();
+    setStatus("Opening Google sign-in...", "info");
+
+    try {
+        const auth = await initFirebaseAuth();
+        const {
+            GoogleAuthProvider,
+            signInWithPopup,
+            signInWithRedirect,
+        } = await loadFirebaseModules().then(([, authModule]) => authModule);
+        const provider = new GoogleAuthProvider();
+
+        provider.setCustomParameters({
+            prompt: "select_account",
+        });
+
+        try {
+            const credential = await signInWithPopup(auth, provider);
+
+            storeAuthState(credential.user);
+            setLoggedInState(credential.user);
+            setStatus(`Signed in with Google as ${credential.user.email}.`, "success");
+        } catch (popupError) {
+            if (popupError?.code !== "auth/popup-blocked") {
+                throw popupError;
+            }
+
+            setStatus(getFriendlyAuthMessage(popupError), "info");
+            await signInWithRedirect(auth, provider);
+        }
+    } catch (error) {
+        setStatus(getFriendlyAuthMessage(error), "error");
+    }
+}
+
 async function handleLogout(event) {
     event.preventDefault();
 
@@ -351,6 +406,7 @@ async function handleLogout(event) {
 function wireAuthForms() {
     const loginForm = document.querySelector("[data-login-form]");
     const signupForm = document.querySelector("[data-signup-form]");
+    const googleAuthButtons = document.querySelectorAll("[data-google-auth]");
 
     if (loginForm) {
         loginForm.addEventListener("submit", handleLogin);
@@ -360,6 +416,10 @@ function wireAuthForms() {
         signupForm.addEventListener("submit", handleSignup);
     }
 
+    googleAuthButtons.forEach((button) => {
+        button.addEventListener("click", handleGoogleAuth);
+    });
+
     document.querySelectorAll("[data-logout-link]").forEach((link) => {
         link.addEventListener("click", handleLogout);
     });
@@ -368,7 +428,7 @@ function wireAuthForms() {
 async function boot() {
     wireAuthForms();
 
-    if (!document.querySelector("[data-auth-guest], [data-auth-user], [data-login-form], [data-signup-form], [data-logout-link]")) {
+    if (!document.querySelector("[data-auth-guest], [data-auth-user], [data-login-form], [data-signup-form], [data-google-auth], [data-logout-link]")) {
         return;
     }
 
